@@ -237,7 +237,7 @@ class Home extends Component {
               >
                 <AiFillCaretDown size="20px" />
               </button>
-              <ul id="sortOptions">
+              <ul className="hide" id="sortOptions">
                 {sortByOptions.map(eachItem => (
                   <li
                     key={eachItem.id}
