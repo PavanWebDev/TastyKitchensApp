@@ -1,0 +1,57 @@
+.food-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.food-item > img {
+  height: 180px;
+  width: 275px;
+  border-radius: 12px;
+}
+
+.food-details > h1 {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  color: #334155;
+  margin: 0;
+}
+
+.food-details > p {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 8px 0;
+  color: #334155;
+}
+
+.food-details > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+}
+
+.food-details > div > {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: #0a1f44;
+}
+
+.add-btn {
+  background: transparent;
+  padding: 5px;
+  width: 58px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1.5px solid #ffa412;
+  color: #ffa412;
+  cursor: pointer;
+  margin: 5px 0;
+}

@@ -1,0 +1,36 @@
+.not-found-cont {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-cont > h1 {
+  color: #1e293b;
+  font-weight: 600;
+  margin-top: 40px;
+  margin-bottom: 0;
+  font-family: 'DM Sans';
+  font-style: normal;
+}
+
+.not-found-cont > p {
+  color: #475569;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.home-page-btn {
+  background: #f7931e;
+  border-radius: 12px;
+  border: 0;
+  color: #ffffff;
+  height: 45px;
+  width: 120px;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: pointer;
+}
