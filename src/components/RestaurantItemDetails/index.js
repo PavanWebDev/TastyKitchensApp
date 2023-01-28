@@ -6,7 +6,6 @@ import {AiFillStar} from 'react-icons/ai'
 import Header from '../Header'
 import Footer from '../Footer'
 import FoodItem from '../FoodItem'
-import CartContext from '../../context/CartContext'
 import './index.css'
 
 const apiStatusTexts = {
@@ -85,54 +84,45 @@ class RestaurantItemDetails extends Component {
       reviewsCount,
       costForTwo,
     } = itemDetails
+    const onClickAddItem = (foodDetails, quantity) => {
+      const cartList = JSON.parse(localStorage.getItem('cartData'))
+      const cartItemsList = [...cartList, {...foodDetails, quantity}]
+      localStorage.setItem('cartData', JSON.stringify(cartItemsList))
+    }
     return (
-      <CartContext.Consumer>
-        {value => {
-          const {addCartItem} = value
-          const onClickAddItem = (foodItemDetails, quantity) => {
-            addCartItem({...foodItemDetails, quantity})
-          }
-          return (
-            <>
-              <div className="restaurant-details-cont">
-                <img
-                  src={imageUrl}
-                  alt="restaurant"
-                  className="restaurant-img"
-                />
-                <div className="rest-details">
-                  <h1>{name}</h1>
-                  <p>{cuisine}</p>
-                  <p>{location}</p>
-                  <div className="rating-price">
-                    <div className="ratings-reviews">
-                      <div className="star-ratings">
-                        <AiFillStar size="16px" color="white" />
-                        <p>{rating}</p>
-                      </div>
-                      <p>{reviewsCount}+ Ratings</p>
-                    </div>
-                    <hr className="separator" />
-                    <div className="cost-detail">
-                      <p className="price-det">&#8377; {costForTwo}</p>
-                      <p className="price-desc">Cost for two</p>
-                    </div>
-                  </div>
+      <>
+        <div className="restaurant-details-cont">
+          <img src={imageUrl} alt="restaurant" className="restaurant-img" />
+          <div className="rest-details">
+            <h1>{name}</h1>
+            <p>{cuisine}</p>
+            <p>{location}</p>
+            <div className="rating-price">
+              <div className="ratings-reviews">
+                <div className="star-ratings">
+                  <AiFillStar size="16px" color="white" />
+                  <p>{rating}</p>
                 </div>
+                <p>{reviewsCount}+ Ratings</p>
               </div>
-              <ul className="food-items-cont">
-                {foodItemsList.map(eachFoodItem => (
-                  <FoodItem
-                    key={eachFoodItem.id}
-                    foodDetails={eachFoodItem}
-                    onClickAddItem={onClickAddItem}
-                  />
-                ))}
-              </ul>
-            </>
-          )
-        }}
-      </CartContext.Consumer>
+              <hr className="separator" />
+              <div className="cost-detail">
+                <p className="price-det">&#8377; {costForTwo}</p>
+                <p className="price-desc">Cost for two</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul className="food-items-cont">
+          {foodItemsList.map(eachFoodItem => (
+            <FoodItem
+              key={eachFoodItem.id}
+              foodDetails={eachFoodItem}
+              onClickAddItem={onClickAddItem}
+            />
+          ))}
+        </ul>
+      </>
     )
   }
 

@@ -62,6 +62,11 @@ class Home extends Component {
   componentDidMount() {
     this.getOffersList()
     this.getRestaurantsList()
+    let cart = localStorage.getItem('cartData')
+    if (cart === undefined) {
+      cart = []
+      localStorage.setItem('cartData', JSON.stringify(cart))
+    }
   }
 
   getOffersList = async () => {

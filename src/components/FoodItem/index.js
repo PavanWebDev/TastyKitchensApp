@@ -21,12 +21,17 @@ class FoodItem extends Component {
     )
   }
 
-  onClickMinus = () => {
+  onClickMinus = uniqueId => {
     const {quantity} = this.state
+    const cartList = JSON.parse(localStorage.getItem('cartData'))
     if (quantity !== 1) {
       this.setState(prevState => ({quantity: prevState.quantity - 1}))
     } else {
       this.setState({isClicked: false, quantity: 0})
+      const updatedCartList = cartList.filter(
+        eachItem => eachItem.id !== uniqueId,
+      )
+      localStorage.setItem('cartData', JSON.stringify(updatedCartList))
     }
   }
 
