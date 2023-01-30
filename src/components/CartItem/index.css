@@ -7,14 +7,15 @@
 }
 
 .img-name {
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
 .img-name > img {
   height: 100px;
-  width: 175px;
+  width: 150px;
   border-radius: 10px;
 }
 

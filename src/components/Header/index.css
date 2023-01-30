@@ -1,35 +1,26 @@
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 145px;
-  padding-right: 85px;
+.nav {
   background: #f8fafc;
-  height: 90px;
+  height: 85px;
+  margin: 0;
+  padding-left: 0;
+  position: relative;
+  list-style-type: none;
 }
 
 a {
   text-decoration: none;
   color: #334155;
   font-weight: 600;
-}
-
-.nav-links {
-  list-style-type: none;
-  padding-left: 0;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-links > li {
-  font-weight: 600;
+  font-size: 18px;
 }
 
 .header-logo-cont {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: absolute;
+  left: 8%;
+  top: 30%;
 }
 
 .logout-btn {
@@ -41,9 +32,25 @@ a {
   font-weight: 600;
   border: 0;
   cursor: pointer;
+  position: absolute;
+  right: 35px;
+  top: 28%;
 }
 
 .active-link {
   color: #f7931e;
   font-weight: 700;
+  font-size: 18px;
+}
+
+.home-link {
+  position: absolute;
+  top: 36%;
+  right: 16%;
+}
+
+.cart-link {
+  position: absolute;
+  top: 36%;
+  right: 11%;
 }

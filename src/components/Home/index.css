@@ -23,21 +23,51 @@
   padding: 48px;
 }
 
-.restaurants-container > h1 {
+.head-search {
   margin-bottom: 0;
   font-family: 'DM Sans';
   font-style: normal;
   font-weight: 700;
   color: #183b56;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+}
+
+.line {
+  border: 1px solid #cbd2d9;
+  margin-top: 15px;
+}
+
+.search-cont {
+  border: 1px solid #cbd2d9;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 5px;
+}
+
+.search-bar {
+  height: 30px;
+  width: 180px;
+  padding-left: 10px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+}
+
+.icon-src {
+  font-size: 18px;
 }
 
 .filter-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0;
   padding: 0;
-  height: fit-content;
+  height: 30px;
 }
 
 .filter-container > p {
@@ -45,6 +75,7 @@
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
+  margin: 0;
   color: #64748b;
 }
 
@@ -55,10 +86,9 @@
   font-size: 16px;
   color: #64748b;
   font-weight: 500;
-  position: relative;
 }
 
-.options-cont > select {
+.sort-by {
   height: 30px;
   align-self: center;
   outline: none;
@@ -66,6 +96,7 @@
   font-size: 16px;
   font-weight: 500;
   color: #64748b;
+  cursor: pointer;
 }
 
 .restaurants-list {
@@ -78,7 +109,7 @@
 @media screen and (max-width: 1120px) {
   .restaurants-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: auto auto;
   }
 }
 
@@ -123,45 +154,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.hide {
-  display: none;
-}
-
-.show {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  list-style-type: none;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  box-shadow: 0px 0px 2px rgba(40, 41, 61, 0.04),
-    0px 4px 8px rgba(96, 97, 112, 0.16);
-  border-radius: 12px;
-  padding: 5px 15px;
-  width: 120px;
-  height: 85px;
-  position: absolute;
-  top: 15px;
-  right: 5px;
-}
-
-.show > li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.show > li:hover {
-  background: #f1f5f9;
-  border-radius: 10px;
-}
-
-.options-btn {
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-  padding-top: 5px;
 }

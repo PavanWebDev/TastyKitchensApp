@@ -1,6 +1,7 @@
 .counter-cont {
   display: flex;
   align-items: center;
+  height: 38px;
 }
 
 .counter-cont > button {

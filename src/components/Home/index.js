@@ -3,8 +3,7 @@ import {Component} from 'react'
 import Slider from 'react-slick'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {BsFilterLeft} from 'react-icons/bs'
-import {AiFillCaretDown} from 'react-icons/ai'
+import {BsFilterLeft, BsSearch} from 'react-icons/bs'
 import Header from '../Header'
 import RestaurantItem from '../RestaurantItem'
 import Footer from '../Footer'
@@ -57,16 +56,12 @@ class Home extends Component {
     restaurantsList: [],
     offersApiStatus: apiStatusTexts.initial,
     restaurantsApiStatus: apiStatusTexts.initial,
+    searchInput: '',
   }
 
   componentDidMount() {
     this.getOffersList()
     this.getRestaurantsList()
-    let cart = localStorage.getItem('cartData')
-    if (cart === undefined) {
-      cart = []
-      localStorage.setItem('cartData', JSON.stringify(cart))
-    }
   }
 
   getOffersList = async () => {
@@ -191,11 +186,13 @@ class Home extends Component {
     }
   }
 
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
   onChangeSortByOption = event => {
-    const optionsElement = document.getElementById('sortOptions')
-    optionsElement.classList.toggle('show')
     this.setState(
-      {selectedSortByValue: event.target.textContent},
+      {selectedSortByValue: event.target.value},
       this.getRestaurantsList,
     )
   }
@@ -220,13 +217,25 @@ class Home extends Component {
   }
 
   render() {
-    const {activePage, selectedSortByValue} = this.state
+    const {activePage, selectedSortByValue, searchInput} = this.state
     return (
       <div className="home-cont">
         <Header isHome isCart={false} />
         {this.getOffersView()}
         <div className="restaurants-container">
-          <h1>Popular Restaurants</h1>
+          <div className="head-search">
+            <h1>Popular Restaurants</h1>
+            <div className="search-cont">
+              <BsSearch className="icon-src" />
+              <input
+                type="search"
+                placeholder="Search Restaurants here"
+                className="search-bar"
+                value={searchInput}
+                onChange={this.onChangeSearchInput}
+              />
+            </div>
+          </div>
           <div className="filter-container">
             <p>
               Select Your favorite restaurant special dish and make your day
@@ -234,28 +243,21 @@ class Home extends Component {
             </p>
             <div className="options-cont">
               <BsFilterLeft size="28px" />
-              Sort by {selectedSortByValue}
-              <button
-                type="button"
-                className="options-btn"
-                onClick={this.onClickArrow}
+              Sort by
+              <select
+                className="sort-by"
+                id="sortOptions"
+                onChange={this.onChangeSortByOption}
               >
-                <AiFillCaretDown size="20px" />
-              </button>
-              <ul className="hide" id="sortOptions">
                 {sortByOptions.map(eachItem => (
-                  <li
-                    key={eachItem.id}
-                    onClick={this.onChangeSortByOption}
-                    value={eachItem.value}
-                  >
+                  <option key={eachItem.id} value={selectedSortByValue}>
                     {eachItem.displayText}
-                  </li>
+                  </option>
                 ))}
-              </ul>
+              </select>
             </div>
           </div>
-          <hr />
+          <hr className="line" />
           {this.getRestaurantsListView()}
           <div className="page-controls">
             <button

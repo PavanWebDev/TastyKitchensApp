@@ -9,8 +9,16 @@ class FoodItem extends Component {
 
   itemAddedToCart = () => {
     const {foodDetails, onClickAddItem} = this.props
+    const {id} = foodDetails
     const {quantity} = this.state
-    onClickAddItem(foodDetails, quantity)
+    onClickAddItem(foodDetails, quantity, id)
+  }
+
+  onRemoveItem = () => {
+    const {foodDetails, onClickRemoveItem} = this.props
+    const {id} = foodDetails
+    const {quantity} = this.state
+    onClickRemoveItem(foodDetails, quantity, id)
   }
 
   onClickPlus = () => {
@@ -21,17 +29,18 @@ class FoodItem extends Component {
     )
   }
 
-  onClickMinus = uniqueId => {
+  onClickMinus = () => {
     const {quantity} = this.state
-    const cartList = JSON.parse(localStorage.getItem('cartData'))
     if (quantity !== 1) {
-      this.setState(prevState => ({quantity: prevState.quantity - 1}))
-    } else {
-      this.setState({isClicked: false, quantity: 0})
-      const updatedCartList = cartList.filter(
-        eachItem => eachItem.id !== uniqueId,
+      this.setState(
+        {
+          quantity: quantity - 1,
+          isClicked: true,
+        },
+        this.onRemoveItem,
       )
-      localStorage.setItem('cartData', JSON.stringify(updatedCartList))
+    } else {
+      this.setState({isClicked: false, quantity: 0}, this.onRemoveItem)
     }
   }
 
@@ -44,7 +53,7 @@ class FoodItem extends Component {
         <img src={imageUrl} alt="food item" />
         <div className="food-details">
           <h1>{name}</h1>
-          <p>&#8377; {cost}.00</p>
+          <p>₹ {cost}.00</p>
           <div>
             <AiFillStar color="gold" size="18px" />
             <p>{rating}</p>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import {Link} from 'react-router-dom'
 import {Component} from 'react'
 import './index.css'
@@ -6,15 +7,20 @@ import Footer from '../Footer'
 import CartItem from '../CartItem'
 
 class Cart extends Component {
-  state = {totalItemsCost: 0}
+  state = {totalItemsCost: 0, isOrderPlaced: false}
 
   componentDidMount() {
     const cartList = JSON.parse(localStorage.getItem('cartData'))
-    let totalItemsCost = 0
-    cartList.forEach(element => {
-      totalItemsCost += element.cost * element.quantity
-    })
-    this.setState({totalItemsCost})
+    if (cartList === null || cartList === undefined) {
+      const cart = []
+      localStorage.setItem('cartData', JSON.stringify(cart))
+    } else {
+      let totalItemsCost = 0
+      cartList.forEach(element => {
+        totalItemsCost += element.cost * element.quantity
+      })
+      this.setState({totalItemsCost})
+    }
   }
 
   updateState = () => {
@@ -57,10 +63,38 @@ class Cart extends Component {
     this.updateState()
   }
 
+  onClickPlaceOrder = () => {
+    this.setState({isOrderPlaced: true})
+    const cart = []
+    localStorage.setItem('cartData', JSON.stringify(cart))
+  }
+
+  renderPaymentSuccessView = () => (
+    <>
+      <Header isHome={false} isCart />
+      <div className="payment-success">
+        <img
+          src="https://res.cloudinary.com/dcxurp30f/image/upload/v1675015549/Vector_lkdnvm.png"
+          alt="payment success"
+        />
+        <h1>Payment Successful</h1>
+        <p>
+          Thank you for ordering <br /> Your payment is successfully completed.
+        </p>
+        <Link to="/">
+          <button className="home-pg-btn" type="button">
+            Go To Home Page
+          </button>
+        </Link>
+      </div>
+      <Footer />
+    </>
+  )
+
   renderCartView = () => {
     const cartList = JSON.parse(localStorage.getItem('cartData'))
     const {totalItemsCost} = this.state
-    if (cartList.length === 0) {
+    if (cartList === null || cartList.length === 0) {
       return (
         <>
           <Header isHome={false} isCart />
@@ -77,6 +111,7 @@ class Cart extends Component {
               </button>
             </Link>
           </div>
+          <Footer />
         </>
       )
     }
@@ -99,11 +134,15 @@ class Cart extends Component {
           ))}
           <hr />
           <li className="cart-summary">
-            <p>Order Total:</p>
-            <p>₹ {totalItemsCost}.00</p>
+            <h1>Order Total:</h1>
+            <p testid="total-price">₹ {totalItemsCost}.00</p>
           </li>
           <li className="order-btn">
-            <button type="button" className="place-odr">
+            <button
+              type="button"
+              className="place-odr"
+              onClick={this.onClickPlaceOrder}
+            >
               Place Order
             </button>
           </li>
@@ -114,7 +153,14 @@ class Cart extends Component {
   }
 
   render() {
-    return <>{this.renderCartView()}</>
+    const {isOrderPlaced} = this.state
+    return (
+      <>
+        {isOrderPlaced
+          ? this.renderPaymentSuccessView()
+          : this.renderCartView()}
+      </>
+    )
   }
 }
 export default Cart

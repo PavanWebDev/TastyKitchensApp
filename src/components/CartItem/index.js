@@ -46,20 +46,20 @@ class CartItem extends Component {
       <li className="cart-item" testid="cartItem">
         <div className="img-name">
           <img src={imageUrl} alt="cartItem" />
-          <p className="title">{name}</p>
+          <h1 className="title">{name}</h1>
         </div>
         <div className="counter-cont">
           <button
             type="button"
-            testid="decrement-count"
+            testid="decrement-quantity"
             onClick={this.onClickRemoveItem}
           >
             -
           </button>
-          <div>{quantity}</div>
+          <p testid="item-quantity">{quantity}</p>
           <button
             type="button"
-            testid="increment-count"
+            testid="increment-quantity"
             onClick={this.onClickAddItem}
           >
             +

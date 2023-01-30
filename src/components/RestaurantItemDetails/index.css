@@ -88,5 +88,5 @@
   padding-left: 0;
   padding: 35px 150px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: auto auto;
 }

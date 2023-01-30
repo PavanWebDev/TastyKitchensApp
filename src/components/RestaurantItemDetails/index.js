@@ -67,6 +67,49 @@ class RestaurantItemDetails extends Component {
     })
   }
 
+  onClickAddItem = (foodDetails, quantity, uniqueId) => {
+    const cartList = JSON.parse(localStorage.getItem('cartData'))
+    let cartItemsList
+    if (cartList === null) {
+      cartItemsList = [{...foodDetails, quantity}]
+    } else {
+      let exists
+      cartList.forEach(each => {
+        if (each.id === uniqueId) {
+          exists = true
+        }
+      })
+      if (exists) {
+        cartItemsList = cartList.map(eachCartItem => {
+          if (eachCartItem.id === uniqueId) {
+            return {...eachCartItem, quantity}
+          }
+          return eachCartItem
+        })
+      } else {
+        cartItemsList = [...cartList, {...foodDetails, quantity}]
+      }
+    }
+    localStorage.setItem('cartData', JSON.stringify(cartItemsList))
+  }
+
+  onClickRemoveItem = (foodDetails, quantity, uniqueId) => {
+    const cartList = JSON.parse(localStorage.getItem('cartData'))
+    console.log(quantity)
+    let updatedCartList
+    if (quantity < 1) {
+      updatedCartList = cartList.filter(eachItem => eachItem.id !== uniqueId)
+    } else {
+      updatedCartList = cartList.map(eachCartItem => {
+        if (eachCartItem.id === uniqueId) {
+          return {...eachCartItem, quantity}
+        }
+        return eachCartItem
+      })
+    }
+    localStorage.setItem('cartData', JSON.stringify(updatedCartList))
+  }
+
   renderRestaurantDetailsLoadingView = () => (
     <div testid="restaurant-details-loader" className="restaurants-loader-cont">
       <Loader type="TailSpin" color="#F7931E" height={75} width={75} />
@@ -84,11 +127,6 @@ class RestaurantItemDetails extends Component {
       reviewsCount,
       costForTwo,
     } = itemDetails
-    const onClickAddItem = (foodDetails, quantity) => {
-      const cartList = JSON.parse(localStorage.getItem('cartData'))
-      const cartItemsList = [...cartList, {...foodDetails, quantity}]
-      localStorage.setItem('cartData', JSON.stringify(cartItemsList))
-    }
     return (
       <>
         <div className="restaurant-details-cont">
@@ -118,7 +156,8 @@ class RestaurantItemDetails extends Component {
             <FoodItem
               key={eachFoodItem.id}
               foodDetails={eachFoodItem}
-              onClickAddItem={onClickAddItem}
+              onClickAddItem={this.onClickAddItem}
+              onClickRemoveItem={this.onClickRemoveItem}
             />
           ))}
         </ul>

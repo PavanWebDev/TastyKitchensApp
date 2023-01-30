@@ -9,8 +9,10 @@ const Header = props => {
     history.replace('/login')
   }
   const {isHome, isCart} = props
+  const activeHomeClass = isHome ? 'active-link' : ''
+  const activeCartClass = isCart ? 'active-link' : ''
   return (
-    <nav>
+    <ul className="nav">
       <Link to="/">
         <li className="header-logo-cont">
           <img
@@ -21,20 +23,18 @@ const Header = props => {
           <p className="logo-title">Tasty Kitchens</p>
         </li>
       </Link>
-      <ul className="nav-links">
-        <Link to="/">
-          <li className={isHome ? 'active-link' : ''}>Home</li>
-        </Link>
-        <Link to="/cart">
-          <li className={isCart ? 'active-link' : ''}>Cart</li>
-        </Link>
-        <li>
-          <button type="button" className="logout-btn" onClick={onClickLogout}>
-            Logout
-          </button>
-        </li>
-      </ul>
-    </nav>
+      <Link to="/">
+        <li className={`home-link ${activeHomeClass}`}>Home</li>
+      </Link>
+      <Link to="/cart">
+        <li className={`cart-link ${activeCartClass}`}>Cart</li>
+      </Link>
+      <li>
+        <button type="button" className="logout-btn" onClick={onClickLogout}>
+          Logout
+        </button>
+      </li>
+    </ul>
   )
 }
 
