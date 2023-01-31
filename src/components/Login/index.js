@@ -66,15 +66,15 @@ class Login extends Component {
                 <label htmlFor="user">USERNAME</label>
                 <input
                   type="text"
-                  id="user"
+                  id="user1"
                   placeholder="Username"
                   value={username}
                   onChange={this.onChangeUsername}
                 />
-                <label htmlFor="pass">PASSWORD</label>
+                <label htmlFor="passD">PASSWORD</label>
                 <input
                   type="password"
-                  id="pass"
+                  id="passD"
                   placeholder="Password"
                   value={password}
                   onChange={this.onChangePassword}
@@ -102,18 +102,18 @@ class Login extends Component {
           />
           <h1>Login</h1>
           <form onSubmit={this.onSubmitForm}>
-            <label htmlFor="user">USERNAME</label>
+            <label htmlFor="userM">USERNAME</label>
             <input
               type="text"
-              id="user"
+              id="userM"
               placeholder="Username"
               value={username}
               onChange={this.onChangeUsername}
             />
-            <label htmlFor="pass">PASSWORD</label>
+            <label htmlFor="passM">PASSWORD</label>
             <input
               type="password"
-              id="pass"
+              id="passM"
               placeholder="Password"
               value={password}
               onChange={this.onChangePassword}
