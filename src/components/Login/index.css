@@ -98,3 +98,56 @@ form > input {
   margin-top: 0;
   margin-bottom: 8px;
 }
+
+.mobile-bg-container {
+  display: none;
+}
+
+@media screen and (max-width: 760px) {
+  .bg-container {
+    display: none;
+  }
+
+  .mobile-bg-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .mobile-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50vh;
+  }
+
+  form > h1 {
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 35px;
+  }
+
+  form {
+    align-self: center;
+    height: 45vh;
+    width: 100%;
+    padding: 0 25px;
+    line-height: 30px;
+    margin-bottom: 25px;
+  }
+
+  form > input {
+    width: 100%;
+    height: 45px;
+  }
+
+  .login-btn {
+    height: 45px;
+    font-size: 18px;
+  }
+
+  form > label {
+    margin: 0;
+  }
+}

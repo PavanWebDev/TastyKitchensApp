@@ -9,4 +9,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #f7931e;
+  border-radius: 100vw;
+}
+
+body::-webkit-scrollbar-track {
+  background: linear-gradient(lightgray, #0f172a);
+}
+
+body::-webkit-scrollbar-track:hover {
+  background-color: gray;
 }

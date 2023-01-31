@@ -49,50 +49,82 @@ class Login extends Component {
       return <Redirect to="/" />
     }
     return (
-      <div className="bg-container">
-        <div className="login-details">
-          <div className="card-cont">
-            <div className="logo-cont">
-              <img
-                src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672746641/logo_wqzjft.png"
-                alt="website logo"
-                className="logo"
-              />
-              <h1 className="logo-title">Tasty Kitchens</h1>
+      <>
+        <div className="bg-container">
+          <div className="login-details">
+            <div className="card-cont">
+              <div className="logo-cont">
+                <img
+                  src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672746641/logo_wqzjft.png"
+                  alt="website logo"
+                  className="logo"
+                />
+                <h1 className="logo-title">Tasty Kitchens</h1>
+              </div>
+              <h1 className="login-txt">Login</h1>
+              <form onSubmit={this.onSubmitForm}>
+                <label htmlFor="user">USERNAME</label>
+                <input
+                  type="text"
+                  id="user"
+                  placeholder="Username"
+                  value={username}
+                  onChange={this.onChangeUsername}
+                />
+                <label htmlFor="pass">PASSWORD</label>
+                <input
+                  type="password"
+                  id="pass"
+                  placeholder="Password"
+                  value={password}
+                  onChange={this.onChangePassword}
+                />
+                {isError && <p className="error">{errMsg}</p>}
+                <button type="submit" className="login-btn">
+                  Login
+                </button>
+              </form>
             </div>
-            <h1 className="login-txt">Login</h1>
-            <form onSubmit={this.onSubmitForm}>
-              <label htmlFor="user">USERNAME</label>
-              <input
-                type="text"
-                id="user"
-                placeholder="Username"
-                value={username}
-                onChange={this.onChangeUsername}
-              />
-              <label htmlFor="pass">PASSWORD</label>
-              <input
-                type="password"
-                id="pass"
-                placeholder="Password"
-                value={password}
-                onChange={this.onChangePassword}
-              />
-              {isError && <p className="error">{errMsg}</p>}
-              <button type="submit" className="login-btn">
-                Login
-              </button>
-            </form>
+          </div>
+          <div className="img-cont">
+            <img
+              src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672742515/Rectangle_1456_sbtwrd.png"
+              alt="website login"
+              className="login-img"
+            />
           </div>
         </div>
-        <div className="img-cont">
+        <div className="mobile-bg-container">
           <img
-            src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672742515/Rectangle_1456_sbtwrd.png"
+            src="https://res.cloudinary.com/dcxurp30f/image/upload/v1675138419/Rectangle_1457_jtwoto.png"
             alt="website login"
-            className="login-img"
+            className="mobile-img"
           />
+          <h1>Login</h1>
+          <form onSubmit={this.onSubmitForm}>
+            <label htmlFor="user">USERNAME</label>
+            <input
+              type="text"
+              id="user"
+              placeholder="Username"
+              value={username}
+              onChange={this.onChangeUsername}
+            />
+            <label htmlFor="pass">PASSWORD</label>
+            <input
+              type="password"
+              id="pass"
+              placeholder="Password"
+              value={password}
+              onChange={this.onChangePassword}
+            />
+            {isError && <p className="error">{errMsg}</p>}
+            <button type="submit" className="login-btn">
+              Login
+            </button>
+          </form>
         </div>
-      </div>
+      </>
     )
   }
 }

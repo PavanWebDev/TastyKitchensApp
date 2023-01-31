@@ -2,9 +2,11 @@
   background: #f8fafc;
   height: 85px;
   margin: 0;
-  padding-left: 0;
-  position: relative;
+  padding: 0 50px;
   list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 a {
@@ -14,13 +16,19 @@ a {
   font-size: 18px;
 }
 
+.logo-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .header-logo-cont {
   display: flex;
   align-items: center;
   gap: 10px;
-  position: absolute;
-  left: 8%;
-  top: 30%;
+}
+
+.hide {
+  display: none;
 }
 
 .logout-btn {
@@ -32,9 +40,6 @@ a {
   font-weight: 600;
   border: 0;
   cursor: pointer;
-  position: absolute;
-  right: 35px;
-  top: 28%;
 }
 
 .active-link {
@@ -43,14 +48,44 @@ a {
   font-size: 18px;
 }
 
-.home-link {
-  position: absolute;
-  top: 36%;
-  right: 16%;
+.routes {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 25vw;
 }
 
-.cart-link {
-  position: absolute;
-  top: 36%;
-  right: 11%;
+.hamburger {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #f7931e;
+  display: none;
+}
+
+@media screen and (max-width: 760px) {
+  .hamburger {
+    display: block;
+  }
+
+  .routes {
+    display: none;
+  }
+
+  .show {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    align-items: center;
+    padding-left: 0;
+    height: fit-content;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    padding: 0 20px;
+  }
 }

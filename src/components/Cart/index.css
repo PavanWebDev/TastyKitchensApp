@@ -54,6 +54,7 @@
   padding: 25px;
   border-radius: 5px;
   list-style-type: none;
+  border: 2px solid rgba(11, 105, 255, 0.1);
 }
 
 hr {
@@ -110,9 +111,35 @@ hr {
   border-radius: 8px;
   border: 0;
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 600;
   align-self: flex-end;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .column-heads {
+    display: none;
+  }
+
+  .cart-items-list {
+    border: 0;
+    background: #f9fbfe90;
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .cart-summary {
+    width: auto;
+    padding: 0;
+  }
+
+  .cart-summary > h1 {
+    margin: 0;
+  }
+
+  .order-btn {
+    width: 100%;
+  }
 }
 
 .payment-success {
@@ -152,4 +179,9 @@ hr {
   border: 0;
   cursor: pointer;
   color: #ffffff;
+}
+
+.cart-line {
+  border: 1px dashed #64748b;
+  width: 95%;
 }

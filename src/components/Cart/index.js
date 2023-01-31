@@ -132,7 +132,7 @@ class Cart extends Component {
               onClickRemove={this.onClickRemove}
             />
           ))}
-          <hr />
+          <hr className="cart-line" />
           <li className="cart-summary">
             <h1>Order Total:</h1>
             <p testid="total-price">₹ {totalItemsCost}.00</p>

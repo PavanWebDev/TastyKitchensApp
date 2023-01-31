@@ -43,30 +43,56 @@ class CartItem extends Component {
     const {quantity} = this.state
     const totalPrice = cost * quantity
     return (
-      <li className="cart-item" testid="cartItem">
-        <div className="img-name">
+      <>
+        <li className="cart-item" testid="cartItem">
+          <div className="img-name">
+            <img src={imageUrl} alt="cartItem" />
+            <h1 className="title">{name}</h1>
+          </div>
+          <div className="counter-cont">
+            <button
+              type="button"
+              testid="decrement-quantity"
+              onClick={this.onClickRemoveItem}
+            >
+              -
+            </button>
+            <p testid="item-quantity">{quantity}</p>
+            <button
+              type="button"
+              testid="increment-quantity"
+              onClick={this.onClickAddItem}
+            >
+              +
+            </button>
+          </div>
+          <p className="price">₹ {totalPrice}.00</p>
+        </li>
+        <li className="m-cart-item" testid="cartItem">
           <img src={imageUrl} alt="cartItem" />
-          <h1 className="title">{name}</h1>
-        </div>
-        <div className="counter-cont">
-          <button
-            type="button"
-            testid="decrement-quantity"
-            onClick={this.onClickRemoveItem}
-          >
-            -
-          </button>
-          <p testid="item-quantity">{quantity}</p>
-          <button
-            type="button"
-            testid="increment-quantity"
-            onClick={this.onClickAddItem}
-          >
-            +
-          </button>
-        </div>
-        <p className="price">₹ {totalPrice}.00</p>
-      </li>
+          <div className="title-counter-price">
+            <h1 className="title">{name}</h1>
+            <div className="counter-cont">
+              <button
+                type="button"
+                testid="decrement-quantity"
+                onClick={this.onClickRemoveItem}
+              >
+                -
+              </button>
+              <p testid="item-quantity">{quantity}</p>
+              <button
+                type="button"
+                testid="increment-quantity"
+                onClick={this.onClickAddItem}
+              >
+                +
+              </button>
+            </div>
+            <p className="price">₹ {totalPrice}.00</p>
+          </div>
+        </li>
+      </>
     )
   }
 }

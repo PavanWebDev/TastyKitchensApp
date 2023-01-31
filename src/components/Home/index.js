@@ -38,7 +38,6 @@ const settings = {
     <div
       style={{
         backgroundColor: 'transparent',
-        borderRadius: '10px',
         padding: '10px',
         marginBottom: '28px',
       }}
@@ -52,7 +51,7 @@ class Home extends Component {
   state = {
     offers: [],
     activePage: 1,
-    selectedSortByValue: sortByOptions[0].value,
+    selectedSortByValue: sortByOptions[1].value,
     restaurantsList: [],
     offersApiStatus: apiStatusTexts.initial,
     restaurantsApiStatus: apiStatusTexts.initial,
@@ -121,10 +120,13 @@ class Home extends Component {
         totalReviews: eachRestaurant.user_rating.total_reviews,
       },
     }))
-    this.setState({
-      restaurantsList: updatedRestaurantsList,
-      restaurantsApiStatus: apiStatusTexts.success,
-    })
+    this.setState(
+      {
+        restaurantsList: updatedRestaurantsList,
+        restaurantsApiStatus: apiStatusTexts.success,
+      },
+      this.updateRestaurantsBasedOnSearch,
+    )
   }
 
   renderOffersLoadingView = () => (
@@ -139,7 +141,12 @@ class Home extends Component {
       <div className="offers-slider-container">
         <Slider {...settings}>
           {offers.map(eachItem => (
-            <img key={eachItem.id} src={eachItem.imageUrl} alt="offer" />
+            <img
+              key={eachItem.id}
+              src={eachItem.imageUrl}
+              className="offer-img"
+              alt="offer"
+            />
           ))}
         </Slider>
       </div>
@@ -158,7 +165,13 @@ class Home extends Component {
 
   renderRestaurantsLoadingView = () => (
     <div testid="restaurants-list-loader" className="restaurants-loader-cont">
-      <Loader type="TailSpin" color="#F7931E" height={75} width={75} />
+      <Loader
+        type="TailSpin"
+        color="#F7931E"
+        height={80}
+        width={80}
+        radius={15}
+      />
     </div>
   )
 
@@ -176,18 +189,44 @@ class Home extends Component {
     )
   }
 
+  renderNoRestaurantsView = () => (
+    <div className="no-rest-view">
+      <img
+        src="https://res.cloudinary.com/dcxurp30f/image/upload/v1675081302/restaurant-removebg-preview_ysj08m.png"
+        alt="no restaurants"
+      />
+      <p>
+        Sorry we can`&apos;t find the Restaurant you are looking for. <br /> Try
+        something else
+      </p>
+    </div>
+  )
+
   getRestaurantsListView = () => {
-    const {restaurantsApiStatus} = this.state
+    const {restaurantsApiStatus, restaurantsList} = this.state
     switch (restaurantsApiStatus) {
       case apiStatusTexts.success:
+        if (restaurantsList.length === 0) {
+          return this.renderNoRestaurantsView()
+        }
         return this.renderRestaurantsSuccessView()
       default:
         return this.renderRestaurantsLoadingView()
     }
   }
 
+  updateRestaurantsBasedOnSearch = () => {
+    this.setState(prevState => ({
+      restaurantsList: prevState.restaurantsList.filter(eachItem =>
+        eachItem.name
+          .toLowerCase()
+          .includes(prevState.searchInput.toLowerCase()),
+      ),
+    }))
+  }
+
   onChangeSearchInput = event => {
-    this.setState({searchInput: event.target.value})
+    this.setState({searchInput: event.target.value}, this.getRestaurantsList)
   }
 
   onChangeSortByOption = event => {
@@ -211,11 +250,6 @@ class Home extends Component {
     }
   }
 
-  onClickArrow = () => {
-    const optionsElement = document.getElementById('sortOptions')
-    optionsElement.classList.toggle('show')
-  }
-
   render() {
     const {activePage, selectedSortByValue, searchInput} = this.state
     return (
@@ -225,6 +259,12 @@ class Home extends Component {
         <div className="restaurants-container">
           <div className="head-search">
             <h1>Popular Restaurants</h1>
+            <p>
+              Select Your favourite restaurant special dish and make your day
+              happy...
+            </p>
+          </div>
+          <div className="filter-container">
             <div className="search-cont">
               <BsSearch className="icon-src" />
               <input
@@ -235,56 +275,50 @@ class Home extends Component {
                 onChange={this.onChangeSearchInput}
               />
             </div>
-          </div>
-          <div className="filter-container">
-            <p>
-              Select Your favorite restaurant special dish and make your day
-              happy...
-            </p>
             <div className="options-cont">
               <BsFilterLeft size="28px" />
-              Sort by
+              <p className="srt-by-txt">Sort By</p>
               <select
                 className="sort-by"
-                id="sortOptions"
+                value={selectedSortByValue}
                 onChange={this.onChangeSortByOption}
               >
                 {sortByOptions.map(eachItem => (
-                  <option key={eachItem.id} value={selectedSortByValue}>
+                  <option key={eachItem.id} value={eachItem.value}>
                     {eachItem.displayText}
                   </option>
                 ))}
               </select>
             </div>
           </div>
-          <hr className="line" />
-          {this.getRestaurantsListView()}
-          <div className="page-controls">
-            <button
-              type="button"
-              className="arrow-btn"
-              onClick={this.onClickPreviousPage}
-              testid="pagination-left-button"
-            >
-              <img
-                src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672851403/Icon_idvoa9.png"
-                alt="arrow"
-              />
-            </button>
-            <div testid="active-page-number">{activePage} of 4</div>
-            <button
-              type="button"
-              className="arrow-btn"
-              onClick={this.onClickNextPage}
-              testid="pagination-right-button"
-            >
-              <img
-                src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672851403/Icon_idvoa9.png"
-                alt="arrow"
-                className="right-arw"
-              />
-            </button>
-          </div>
+        </div>
+        <hr className="line" />
+        {this.getRestaurantsListView()}
+        <div className="page-controls">
+          <button
+            type="button"
+            className="arrow-btn"
+            onClick={this.onClickPreviousPage}
+            testid="pagination-left-button"
+          >
+            <img
+              src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672851403/Icon_idvoa9.png"
+              alt="arrow"
+            />
+          </button>
+          <span testid="active-page-number">{activePage} of 4</span>
+          <button
+            type="button"
+            className="arrow-btn"
+            onClick={this.onClickNextPage}
+            testid="pagination-right-button"
+          >
+            <img
+              src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672851403/Icon_idvoa9.png"
+              alt="arrow"
+              className="right-arw"
+            />
+          </button>
         </div>
         <Footer />
       </div>

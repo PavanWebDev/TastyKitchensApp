@@ -2,21 +2,24 @@
   background-image: url('https://res.cloudinary.com/dcxurp30f/image/upload/v1672902402/Restaurant_details_bg_p4mk9t.png');
   background-size: cover;
   background-color: #333333;
-  padding-left: 175px;
-  padding-top: 30px;
-  padding-bottom: 30px;
   margin-top: 25px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 36vw);
+  justify-items: center;
   align-items: center;
-  gap: 20px;
   color: #ffffff;
   font-style: normal;
+  padding: 20px 30px;
+  position: relative;
 }
 
 .restaurant-img {
-  height: 250px;
-  width: 385px;
+  width: 28vw;
   border-radius: 8px;
+}
+
+.rest-details {
+  width: calc(25vw + 30px);
 }
 
 .rest-details > h1 {
@@ -32,6 +35,38 @@
   margin: 12px 0;
 }
 
+@media screen and (max-width: 800px) {
+  .restaurant-details-cont {
+    padding: 20px 5px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .rest-details {
+    width: auto;
+    margin-left: 40vw;
+  }
+
+  .rest-details > h1 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .rest-details > p {
+    font-size: 14px;
+  }
+
+  .restaurant-img {
+    position: absolute;
+    border-radius: 0;
+    height: 150px;
+    width: 135px;
+    border-bottom-right-radius: 80px;
+    border-bottom-left-radius: 80px;
+    top: 0;
+    left: 0;
+  }
+}
 .rating-price {
   display: flex;
   align-items: center;
@@ -85,8 +120,14 @@
 
 .food-items-cont {
   list-style-type: none;
-  padding-left: 0;
-  padding: 35px 150px;
+  padding: 35px 85px;
   display: grid;
   grid-template-columns: auto auto;
+}
+
+@media screen and (max-width: 800px) {
+  .food-items-cont {
+    padding: 20px 20px;
+    grid-template-columns: auto;
+  }
 }

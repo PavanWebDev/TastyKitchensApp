@@ -1,10 +1,9 @@
 .rest-item {
   list-style-type: none;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  gap: 10px;
-  margin-bottom: 32px;
-  margin-right: 10px;
+  margin-bottom: 12px;
 }
 
 .details-cont {
@@ -32,6 +31,13 @@
   height: 135px;
   width: 200px;
   border-radius: 16px;
+}
+
+@media screen and (max-width: 760px) {
+  .rest-img {
+    height: 150px;
+    width: 45vw;
+  }
 }
 
 .ratings-cont {
