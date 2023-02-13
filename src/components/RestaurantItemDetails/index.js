@@ -19,6 +19,7 @@ class RestaurantItemDetails extends Component {
     itemDetails: {},
     foodItemsList: [],
     apiStatus: apiStatusTexts.initial,
+    cartLength: JSON.parse(localStorage.getItem('cartData')).length,
   }
 
   componentDidMount() {
@@ -91,11 +92,14 @@ class RestaurantItemDetails extends Component {
       }
     }
     localStorage.setItem('cartData', JSON.stringify(cartItemsList))
+    this.setState(
+      {cartLength: JSON.parse(localStorage.getItem('cartData')).length},
+      this.renderRestaurantDetailsSuccessView,
+    )
   }
 
   onClickRemoveItem = (foodDetails, quantity, uniqueId) => {
     const cartList = JSON.parse(localStorage.getItem('cartData'))
-    console.log(quantity)
     let updatedCartList
     if (quantity < 1) {
       updatedCartList = cartList.filter(eachItem => eachItem.id !== uniqueId)
@@ -108,6 +112,10 @@ class RestaurantItemDetails extends Component {
       })
     }
     localStorage.setItem('cartData', JSON.stringify(updatedCartList))
+    this.setState(
+      {cartLength: JSON.parse(localStorage.getItem('cartData')).length},
+      this.renderRestaurantDetailsSuccessView,
+    )
   }
 
   renderRestaurantDetailsLoadingView = () => (
@@ -117,7 +125,7 @@ class RestaurantItemDetails extends Component {
   )
 
   renderRestaurantDetailsSuccessView = () => {
-    const {itemDetails, foodItemsList} = this.state
+    const {itemDetails, foodItemsList, cartLength} = this.state
     const {
       imageUrl,
       name,
@@ -129,6 +137,7 @@ class RestaurantItemDetails extends Component {
     } = itemDetails
     return (
       <>
+        <Header isHome isCart={false} cartLength={cartLength} />
         <div className="restaurant-details-cont">
           <img src={imageUrl} alt="restaurant" className="restaurant-img" />
           <div className="rest-details">
@@ -161,6 +170,7 @@ class RestaurantItemDetails extends Component {
             />
           ))}
         </ul>
+        <Footer />
       </>
     )
   }
@@ -176,13 +186,7 @@ class RestaurantItemDetails extends Component {
   }
 
   render() {
-    return (
-      <>
-        <Header isHome isCart={false} />
-        {this.getRestaurantDetailsView()}
-        <Footer />
-      </>
-    )
+    return <>{this.getRestaurantDetailsView()}</>
   }
 }
 

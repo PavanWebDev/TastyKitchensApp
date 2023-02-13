@@ -97,7 +97,7 @@ class Cart extends Component {
     if (cartList === null || cartList.length === 0) {
       return (
         <>
-          <Header isHome={false} isCart />
+          <Header isHome={false} isCart cartLength={cartList.length} />
           <div className="empty-view-cont">
             <img
               src="https://res.cloudinary.com/dcxurp30f/image/upload/v1672922182/Layer_2_nspaqd.png"
@@ -117,7 +117,7 @@ class Cart extends Component {
     }
     return (
       <div className="cart-view-cont">
-        <Header isHome={false} isCart />
+        <Header isHome={false} isCart cartLength={cartList.length} />
         <ul className="cart-items-list">
           <li className="column-heads">
             <p>Item</p>

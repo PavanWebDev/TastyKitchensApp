@@ -5,7 +5,10 @@ import Counter from '../Counter'
 import './index.css'
 
 class FoodItem extends Component {
-  state = {isClicked: false, quantity: 0}
+  state = {
+    isClicked: false,
+    quantity: 0,
+  }
 
   itemAddedToCart = () => {
     const {foodDetails, onClickAddItem} = this.props
@@ -24,7 +27,10 @@ class FoodItem extends Component {
   onClickPlus = () => {
     const {quantity} = this.state
     this.setState(
-      {quantity: quantity + 1, isClicked: true},
+      {
+        quantity: quantity + 1,
+        isClicked: true,
+      },
       this.itemAddedToCart,
     )
   }

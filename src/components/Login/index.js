@@ -100,8 +100,8 @@ class Login extends Component {
             alt="website login"
             className="mobile-img"
           />
-          <h1>Login</h1>
           <form onSubmit={this.onSubmitForm}>
+            <h1>Login</h1>
             <label htmlFor="userM">USERNAME</label>
             <input
               type="text"

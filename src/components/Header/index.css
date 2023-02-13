@@ -65,9 +65,18 @@ a {
   display: none;
 }
 
+#burger {
+  transition-duration: 350ms;
+}
+
 @media screen and (max-width: 760px) {
   .hamburger {
     display: block;
+  }
+
+  .burger-icon {
+    transform: rotate(180deg);
+    transition-duration: 350ms;
   }
 
   .routes {
@@ -88,4 +97,44 @@ a {
   .nav {
     padding: 0 20px;
   }
+}
+
+#cartLink,
+#cartLi {
+  position: relative;
+  z-index: 3;
+}
+
+.cart-ntf {
+  background-color: #f7931e;
+  height: 22px;
+  width: 22px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -13px;
+  right: -16px;
+  z-index: -1;
+  font-size: 14px;
+  color: #fffaff;
+  font-weight: 700;
+}
+
+.inactive-cart-ntf {
+  background-color: #ccc9c080;
+  height: 22px;
+  width: 22px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -13px;
+  right: -16px;
+  z-index: -1;
+  font-size: 14px;
+  color: #334155;
+  font-weight: 700;
 }

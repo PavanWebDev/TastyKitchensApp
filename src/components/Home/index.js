@@ -252,9 +252,10 @@ class Home extends Component {
 
   render() {
     const {activePage, selectedSortByValue, searchInput} = this.state
+    const cartList = JSON.parse(localStorage.getItem('cartData'))
     return (
       <div className="home-cont">
-        <Header isHome isCart={false} />
+        <Header isHome cartLength={cartList.length} />
         {this.getOffersView()}
         <div className="restaurants-container">
           <div className="head-search">
