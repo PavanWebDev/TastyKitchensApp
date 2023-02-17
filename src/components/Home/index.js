@@ -34,6 +34,10 @@ const settings = {
   slidesToScroll: 1,
   arrows: false,
   infinite: true,
+  autoplay: true,
+  speed: 1500,
+  cssEase: 'linear',
+  autoplaySpeed: 3000,
   appendDots: dots => (
     <div
       style={{
@@ -255,7 +259,7 @@ class Home extends Component {
     const cartList = JSON.parse(localStorage.getItem('cartData'))
     return (
       <div className="home-cont">
-        <Header isHome cartLength={cartList.length} />
+        <Header isHome cartLength={cartList === null ? 0 : cartList.length} />
         {this.getOffersView()}
         <div className="restaurants-container">
           <div className="head-search">

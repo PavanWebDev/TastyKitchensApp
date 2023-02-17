@@ -19,10 +19,12 @@ class RestaurantItemDetails extends Component {
     itemDetails: {},
     foodItemsList: [],
     apiStatus: apiStatusTexts.initial,
-    cartLength: JSON.parse(localStorage.getItem('cartData')).length,
+    cartLength: 0,
   }
 
   componentDidMount() {
+    const cartList = JSON.parse(localStorage.getItem('cartData'))
+    this.setState({cartLength: cartList === null ? 0 : cartList.length})
     this.getRestaurantItemDetails()
   }
 
@@ -92,8 +94,9 @@ class RestaurantItemDetails extends Component {
       }
     }
     localStorage.setItem('cartData', JSON.stringify(cartItemsList))
+    const finalCartList = JSON.parse(localStorage.getItem('cartData'))
     this.setState(
-      {cartLength: JSON.parse(localStorage.getItem('cartData')).length},
+      {cartLength: finalCartList === null ? 0 : finalCartList.length},
       this.renderRestaurantDetailsSuccessView,
     )
   }
@@ -112,8 +115,9 @@ class RestaurantItemDetails extends Component {
       })
     }
     localStorage.setItem('cartData', JSON.stringify(updatedCartList))
+    const finalCartList = JSON.parse(localStorage.getItem('cartData'))
     this.setState(
-      {cartLength: JSON.parse(localStorage.getItem('cartData')).length},
+      {cartLength: finalCartList === null ? 0 : finalCartList.length},
       this.renderRestaurantDetailsSuccessView,
     )
   }

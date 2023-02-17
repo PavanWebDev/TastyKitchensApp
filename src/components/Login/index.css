@@ -82,6 +82,23 @@ form > input {
   outline: none;
 }
 
+.pass-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  height: 20px;
+  width: fit-content;
+}
+
+.label-pass {
+  width: fit-content;
+  color: #475569;
+}
+
 .login-btn {
   background: #f7931e;
   border-radius: 8px;

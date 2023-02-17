@@ -6,12 +6,30 @@ import './index.css'
 class Login extends Component {
   state = {username: '', password: '', isError: false, errMsg: ''}
 
-  onChangeUsername = event => {
-    this.setState({username: event.target.value})
+  onChangeUsername = e => {
+    this.setState({username: e.target.value})
   }
 
-  onChangePassword = event => {
-    this.setState({password: event.target.value})
+  onChangePassword = e => {
+    this.setState({password: e.target.value})
+  }
+
+  onChangeCheckbox = e => {
+    const passElement = document.querySelector('.passElementD')
+    if (e.target.checked) {
+      passElement.type = 'text'
+    } else {
+      passElement.type = 'password'
+    }
+  }
+
+  onChangeCheckboxMobile = e => {
+    const passElement = document.querySelector('.passElement')
+    if (e.target.checked) {
+      passElement.type = 'text'
+    } else {
+      passElement.type = 'password'
+    }
   }
 
   onSubmitSuccess = jwtToken => {
@@ -76,9 +94,21 @@ class Login extends Component {
                   type="password"
                   id="passD"
                   placeholder="Password"
+                  className="passElementD"
                   value={password}
                   onChange={this.onChangePassword}
                 />
+                <div className="pass-check">
+                  <input
+                    type="checkbox"
+                    id="showPassD"
+                    className="checkbox"
+                    onChange={this.onChangeCheckbox}
+                  />
+                  <label htmlFor="showPassD" className="label-pass">
+                    Show Password
+                  </label>
+                </div>
                 {isError && <p className="error">{errMsg}</p>}
                 <button type="submit" className="login-btn">
                   Login
@@ -115,9 +145,21 @@ class Login extends Component {
               type="password"
               id="passM"
               placeholder="Password"
+              className="passElement"
               value={password}
               onChange={this.onChangePassword}
             />
+            <div className="pass-check">
+              <input
+                type="checkbox"
+                id="showPass"
+                className="checkbox"
+                onChange={this.onChangeCheckboxMobile}
+              />
+              <label htmlFor="showPass" className="label-pass">
+                Show Password
+              </label>
+            </div>
             {isError && <p className="error">{errMsg}</p>}
             <button type="submit" className="login-btn">
               Login
